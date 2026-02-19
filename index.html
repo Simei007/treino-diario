@@ -1,0 +1,103 @@
+﻿<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0b1220" />
+  <title>TreinoDiario</title>
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <h1>TreinoDiario</h1>
+      <p>Treinos, alimentação e progresso em um só lugar</p>
+    </div>
+    <button id="installBtn" class="btn secondary" hidden>Instalar App</button>
+  </header>
+
+  <main class="grid">
+    <section class="card">
+      <h2>Registro de Treino</h2>
+      <form id="workoutForm" class="form">
+        <label>Data
+          <input type="date" id="workoutDate" required />
+        </label>
+        <label>Tipo de treino
+          <input type="text" id="workoutType" placeholder="Ex: Peito e tríceps" required />
+        </label>
+        <label>Duração (min)
+          <input type="number" id="workoutDuration" min="1" required />
+        </label>
+        <label>Observações
+          <textarea id="workoutNotes" rows="3" placeholder="Carga, séries, sensação..."></textarea>
+        </label>
+        <button type="submit" class="btn">Salvar Treino</button>
+      </form>
+    </section>
+
+    <section class="card">
+      <h2>Registro de Alimentação</h2>
+      <form id="mealForm" class="form">
+        <label>Data
+          <input type="date" id="mealDate" required />
+        </label>
+        <label>Refeição
+          <select id="mealType" required>
+            <option value="">Selecione</option>
+            <option>Café da manhã</option>
+            <option>Almoço</option>
+            <option>Lanche</option>
+            <option>Jantar</option>
+            <option>Ceia</option>
+          </select>
+        </label>
+        <label>Descrição
+          <textarea id="mealDesc" rows="3" placeholder="Ex: Arroz, frango, salada" required></textarea>
+        </label>
+        <label>Água (ml)
+          <input type="number" id="waterMl" min="0" placeholder="Ex: 500" />
+        </label>
+        <button type="submit" class="btn">Salvar Refeição</button>
+      </form>
+    </section>
+
+    <section class="card wide">
+      <h2>Histórico</h2>
+      <div class="stats" id="stats"></div>
+      <div class="history-columns">
+        <div>
+          <h3>Treinos</h3>
+          <ul id="workoutList" class="list"></ul>
+        </div>
+        <div>
+          <h3>Alimentação</h3>
+          <ul id="mealList" class="list"></ul>
+        </div>
+      </div>
+      <button id="clearData" class="btn danger">Limpar todos os dados</button>
+    </section>
+
+    <section class="card wide">
+      <h2>Usar no PC e no Celular</h2>
+      <p>Abra este mesmo link no celular usando o QR Code e instale o app no navegador.</p>
+      <div class="install-box">
+        <div>
+          <label>URL de acesso
+            <input id="shareUrl" type="text" placeholder="http://192.168.x.x:3000" />
+          </label>
+          <div class="btn-row">
+            <button id="copyUrl" class="btn secondary" type="button">Copiar URL</button>
+            <button id="regenQr" class="btn" type="button">Atualizar QR</button>
+          </div>
+          <p id="networkHint" class="hint" hidden></p>
+        </div>
+        <img id="qrImage" alt="QR Code para abrir no celular" />
+      </div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
