@@ -11,6 +11,7 @@ const historyModeSelect = document.getElementById("historyMode");
 const historyDateWrap = document.getElementById("historyDateWrap");
 const historyDateInput = document.getElementById("historyDate");
 historyDateInput.value = today;
+if (!workoutTypeSelect.value) workoutTypeSelect.value = "Peito e tríceps";
 
 function toggleHistoryDateField() {
   const isByDate = historyModeSelect.value === "date";
