@@ -1,4 +1,5 @@
 ﻿const STORAGE_KEY = "treinoDiarioData";
+const PUBLISHED_URL = "https://simei007.github.io/treino-diario/";
 let deferredPrompt = null;
 
 const today = new Date().toISOString().slice(0, 10);
@@ -12,6 +13,13 @@ function normalizeUrl(rawValue) {
   return `http://${value}`;
 }
 
+function getDefaultShareUrl() {
+  const host = window.location.hostname;
+  const isLocalHost = host === "localhost" || host === "127.0.0.1" || host === "0.0.0.0";
+  const isPrivateIp = /^10\./.test(host) || /^192\.168\./.test(host) || /^172\.(1[6-9]|2\d|3[0-1])\./.test(host);
+  return isLocalHost || isPrivateIp ? PUBLISHED_URL : window.location.href;
+}
+
 function updateQrFromInput() {
   const shareInput = document.getElementById("shareUrl");
   const hint = document.getElementById("networkHint");
@@ -19,7 +27,7 @@ function updateQrFromInput() {
 
   if (!url) {
     hint.hidden = false;
-    hint.textContent = "Informe uma URL válida para gerar o QR Code.";
+    hint.textContent = "Informe uma URL valida para gerar o QR Code.";
     return;
   }
 
@@ -31,14 +39,14 @@ function updateQrFromInput() {
 
   if (invalidForPhone) {
     hint.hidden = false;
-    hint.textContent = "Esse endereço não abre no celular. Use o IP local do PC, ex.: http://192.168.15.3:3000";
+    hint.textContent = "Esse endereco nao abre no celular. Use o link publico https://simei007.github.io/treino-diario/";
   } else {
     hint.hidden = false;
-    hint.textContent = "Se não abrir no celular, confirme se ambos estão no mesmo Wi-Fi e libere a porta 3000 no firewall.";
+    hint.textContent = "QR pronto para abrir no celular. Se nao abrir, confira internet e tente novamente.";
   }
 }
 
-const initialUrl = window.location.href;
+const initialUrl = getDefaultShareUrl();
 document.getElementById("shareUrl").value = initialUrl;
 updateQrFromInput();
 
