@@ -6,22 +6,10 @@ const today = new Date().toISOString().slice(0, 10);
 document.getElementById("workoutDate").value = today;
 document.getElementById("mealDate").value = today;
 const workoutTypeSelect = document.getElementById("workoutType");
-const workoutTypeCustomWrap = document.getElementById("workoutTypeCustomWrap");
-const workoutTypeCustomInput = document.getElementById("workoutTypeCustom");
 const historyModeSelect = document.getElementById("historyMode");
 const historyDateWrap = document.getElementById("historyDateWrap");
 const historyDateInput = document.getElementById("historyDate");
 historyDateInput.value = today;
-
-function toggleWorkoutTypeCustomField() {
-  const isOther = workoutTypeSelect.value === "outro";
-  workoutTypeCustomWrap.classList.toggle("hidden-field", !isOther);
-  workoutTypeCustomInput.required = isOther;
-  if (!isOther) workoutTypeCustomInput.value = "";
-}
-
-workoutTypeSelect.addEventListener("change", toggleWorkoutTypeCustomField);
-toggleWorkoutTypeCustomField();
 
 function toggleHistoryDateField() {
   const isByDate = historyModeSelect.value === "date";
@@ -187,21 +175,18 @@ function render() {
 document.getElementById("workoutForm").addEventListener("submit", (e) => {
   e.preventDefault();
   const selectedWorkoutType = workoutTypeSelect.value.trim();
-  const customWorkoutType = workoutTypeCustomInput.value.trim();
-  const finalWorkoutType = selectedWorkoutType === "outro" ? customWorkoutType : selectedWorkoutType;
-  if (!finalWorkoutType) return;
+  if (!selectedWorkoutType) return;
 
   const data = loadData();
   data.workouts.push({
     date: document.getElementById("workoutDate").value,
-    type: finalWorkoutType,
+    type: selectedWorkoutType,
     duration: document.getElementById("workoutDuration").value,
     notes: document.getElementById("workoutNotes").value.trim(),
   });
   saveData(data);
   e.target.reset();
   document.getElementById("workoutDate").value = today;
-  toggleWorkoutTypeCustomField();
   render();
 });
 
