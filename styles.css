@@ -78,6 +78,30 @@ input, select, textarea {
   font: inherit;
 }
 
+.field-suffix {
+  display: flex;
+  align-items: center;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  background: #fff;
+  overflow: hidden;
+}
+
+.field-suffix input {
+  border: 0;
+  border-radius: 0;
+}
+
+.field-suffix span {
+  padding: 0 12px;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.hidden-field {
+  display: none;
+}
+
 .btn {
   border: none;
   background: var(--accent);
@@ -107,6 +131,128 @@ input, select, textarea {
   border-radius: 12px;
   padding: 10px;
   background: #f8fafc;
+  transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+  animation: card-enter 320ms ease both;
+  animation-delay: calc(var(--i, 0) * 45ms);
+}
+
+.list li:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(2, 8, 23, 0.1);
+  border-color: #cbd5e1;
+}
+
+.list li:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(2, 8, 23, 0.08);
+}
+
+@media (hover: none) {
+  .list li:hover {
+    transform: none;
+    box-shadow: none;
+    border-color: #e2e8f0;
+  }
+}
+
+@keyframes card-enter {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .list li {
+    animation: none;
+    transition: none;
+  }
+}
+
+.workout-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border-radius: 999px;
+  padding: 4px 10px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+  transition: transform 180ms ease, box-shadow 180ms ease, filter 180ms ease;
+}
+
+.chip-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.12);
+  color: currentColor;
+}
+
+.chip-icon svg {
+  width: 14px;
+  height: 14px;
+  fill: currentColor;
+  transition: transform 220ms ease;
+}
+
+.workout-chip:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 14px rgba(2, 8, 23, 0.12);
+  filter: saturate(1.08);
+}
+
+.workout-chip:hover .chip-icon svg {
+  transform: scale(1.12) rotate(-8deg);
+}
+
+.workout-chip:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+.workout-forca {
+  color: #7f1d1d;
+  background: #fee2e2;
+}
+
+.workout-cardio {
+  color: #9a3412;
+  background: #ffedd5;
+}
+
+.workout-funcional {
+  color: #1d4ed8;
+  background: #dbeafe;
+}
+
+.workout-alongamento {
+  color: #065f46;
+  background: #d1fae5;
+}
+
+.workout-descanso {
+  color: #312e81;
+  background: #e0e7ff;
+}
+
+.workout-outro {
+  color: #334155;
+  background: #e2e8f0;
+}
+
+.history-toolbar {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 10px;
+  margin-bottom: 12px;
 }
 
 .history-columns {
