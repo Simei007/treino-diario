@@ -6,6 +6,7 @@ const today = new Date().toISOString().slice(0, 10);
 document.getElementById("workoutDate").value = today;
 document.getElementById("mealDate").value = today;
 const workoutTypeSelect = document.getElementById("workoutType");
+const exerciseTipsList = document.getElementById("exerciseTipsList");
 const historyModeSelect = document.getElementById("historyMode");
 const historyDateWrap = document.getElementById("historyDateWrap");
 const historyDateInput = document.getElementById("historyDate");
@@ -22,6 +23,86 @@ historyModeSelect.addEventListener("change", () => {
 });
 historyDateInput.addEventListener("change", render);
 toggleHistoryDateField();
+
+const EXERCISE_TIPS = {
+  "Peito e tríceps": [
+    "Supino reto - 4x8-12",
+    "Supino inclinado com halteres - 3x10-12",
+    "Crucifixo - 3x12",
+    "Tríceps pulley - 3x10-12",
+    "Tríceps testa - 3x10"
+  ],
+  "Costas e bíceps": [
+    "Puxada frontal - 4x8-12",
+    "Remada curvada - 3x8-10",
+    "Remada baixa - 3x10-12",
+    "Rosca direta - 3x10-12",
+    "Rosca martelo - 3x10"
+  ],
+  "Pernas": [
+    "Agachamento livre - 4x8-10",
+    "Leg press - 4x10-12",
+    "Cadeira extensora - 3x12",
+    "Mesa flexora - 3x12",
+    "Panturrilha em pe - 4x15-20"
+  ],
+  "Ombros": [
+    "Desenvolvimento com halteres - 4x8-12",
+    "Elevacao lateral - 3x12",
+    "Elevacao frontal - 3x12",
+    "Crucifixo invertido - 3x12",
+    "Encolhimento - 3x12"
+  ],
+  "Abdômen": [
+    "Prancha - 3x30-60s",
+    "Abdominal infra - 3x15",
+    "Abdominal supra - 3x15",
+    "Abdominal obliquo - 3x12 cada lado"
+  ],
+  "Cardio": [
+    "Esteira leve - 5 min aquecimento",
+    "Corrida ou bike moderada - 20-30 min",
+    "Intervalado (1 min forte / 1 min leve) - 10 min",
+    "Alongamento final - 5 min"
+  ],
+  "Funcional": [
+    "Agachamento com peso corporal - 3x15",
+    "Flexao de braco - 3x10",
+    "Avanco alternado - 3x12 cada perna",
+    "Burpee - 3x8",
+    "Prancha - 3x40s"
+  ],
+  "Alongamento": [
+    "Mobilidade de quadril - 2x40s",
+    "Alongamento posterior da coxa - 2x40s",
+    "Alongamento peitoral e ombros - 2x40s",
+    "Mobilidade de coluna toracica - 2x40s"
+  ],
+  "Descanso ativo": [
+    "Caminhada leve - 20 a 30 min",
+    "Alongamento geral - 10 min",
+    "Respiracao diafragmatica - 5 min"
+  ]
+};
+
+function renderExerciseTips() {
+  const type = workoutTypeSelect.value;
+  const tips = EXERCISE_TIPS[type] || [
+    "Selecione um tipo de treino para ver sugestoes aqui.",
+    "Use carga que permita executar com tecnica correta.",
+    "Descanse 60-90s entre series."
+  ];
+
+  exerciseTipsList.innerHTML = "";
+  tips.forEach((tip) => {
+    const li = document.createElement("li");
+    li.textContent = tip;
+    exerciseTipsList.appendChild(li);
+  });
+}
+
+workoutTypeSelect.addEventListener("change", renderExerciseTips);
+renderExerciseTips();
 
 function normalizeUrl(rawValue) {
   const value = (rawValue || "").trim();
