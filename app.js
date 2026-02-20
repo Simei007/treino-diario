@@ -73,6 +73,13 @@ const EXERCISE_TIPS = {
     "Burpee - 3x8",
     "Prancha - 3x40s"
   ],
+  "Treino em casa": [
+    "Polichinelo - 3x40s",
+    "Agachamento livre - 4x15",
+    "Flexao de braco (joelhos no chao se preciso) - 3x10-12",
+    "Afundo alternado - 3x12 cada perna",
+    "Prancha - 3x30-45s"
+  ],
   "Alongamento": [
     "Mobilidade de quadril - 2x40s",
     "Alongamento posterior da coxa - 2x40s",
